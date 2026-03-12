@@ -1,0 +1,43 @@
+:root {
+  /* Accent Colors */
+  --accent-red: #FF3B30;
+  --accent-orange: #FF6B35;
+  --accent-cyan: #00D4FF;
+  --accent-lime: #B8FF00;
+  --accent-purple: #8B5CF6;
+
+  /* Backgrounds */
+  --bg-dark: #0A0A0F;
+  --bg-card: #1A1A24;
+  --bg-section: #111118;
+
+  /* Text */
+  --text-white: #FFFFFF;
+  --text-light: #E0E0E0;
+  --text-muted: #888899;
+  --text-dim: #555566;
+
+  /* Border */
+  --border-subtle: #2A2A3A;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(90deg, #FF3B30, #FF6B35);
+  --gradient-cyan: linear-gradient(90deg, #00D4FF, #00B4D8);
+  --gradient-lime: linear-gradient(90deg, #B8FF00, #7ACC00);
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 48px;
+  --spacing-xl: 80px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
