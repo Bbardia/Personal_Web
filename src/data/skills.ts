@@ -57,6 +57,6 @@ export const categories: SkillCategory[] = [
 
 export const stats = [
   { value: '5+', label: 'Years Experience', color: 'var(--accent-red)' },
-  { value: '10+', label: 'Projects', color: 'var(--accent-cyan)' },
-  { value: '3', label: 'Publications', color: 'var(--accent-lime)' },
+  { value: '10+', label: 'Projects', color: 'var(--accent-cyan)', href: 'https://github.com/bbardia' },
+  { value: '3', label: 'Publications', color: 'var(--accent-lime)', href: 'https://scholar.google.com/citations?user=ZtBT1EcAAAAJ&hl=en' },
 ]

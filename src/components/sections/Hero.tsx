@@ -15,7 +15,7 @@ export default function Hero() {
         </h1>
 
         <p className={styles.subtext}>
-          Biomedical Engineer | Sensopro | Biomechanics &amp; AI
+          Software Engineer
         </p>
 
         <div className={styles.ctaRow}>

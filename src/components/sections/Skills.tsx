@@ -102,17 +102,33 @@ export default function Skills() {
 
       {/* Stats Bar */}
       <div className={styles.statsBar}>
-        {stats.map((stat, i) => (
-          <div key={stat.label} style={{ display: 'contents' }}>
-            {i > 0 && <div className={styles.statDivider} />}
-            <div className={styles.statItem}>
+        {stats.map((stat, i) => {
+          const content = (
+            <>
               <span className={styles.statValue} style={{ color: stat.color }}>
                 {stat.value}
               </span>
               <span className={styles.statLabel}>{stat.label}</span>
+            </>
+          )
+          return (
+            <div key={stat.label} style={{ display: 'contents' }}>
+              {i > 0 && <div className={styles.statDivider} />}
+              {'href' in stat && stat.href ? (
+                <a
+                  href={stat.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.statItem} ${styles.statLink}`}
+                >
+                  {content}
+                </a>
+              ) : (
+                <div className={styles.statItem}>{content}</div>
+              )}
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
