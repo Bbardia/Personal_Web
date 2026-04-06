@@ -31,6 +31,7 @@ export const categories: SkillCategory[] = [
       { name: 'MATLAB', icon: 'calculator', color: 'var(--accent-cyan)' },
       { name: 'SolidWorks', icon: 'box', color: 'var(--accent-lime)' },
       { name: 'Abaqus', icon: 'grid-3x3', color: 'var(--accent-orange)' },
+      { name: 'React', icon: 'code', color: 'var(--accent-purple)' },
     ],
   },
   {

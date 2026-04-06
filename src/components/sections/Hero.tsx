@@ -5,17 +5,13 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.leftColumn}>
-        <div className={styles.taglineBadge}>
-          <span className={styles.tagDot} />
-          <span className={styles.tagText}>BIOMEDICAL ENGINEER</span>
-        </div>
 
         <h1 className={styles.headline}>
           WELCOME<br />TO MY<br />WORLD
         </h1>
 
         <p className={styles.subtext}>
-          Software Engineer
+          Biomedical Engineer | Software Engineer
         </p>
 
         <div className={styles.ctaRow}>
