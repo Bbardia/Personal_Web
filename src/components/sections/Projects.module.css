@@ -17,7 +17,7 @@
 
 .headerLabel {
   font-family: var(--font-heading);
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 700;
   letter-spacing: -2px;
   color: var(--text-white);
@@ -109,7 +109,7 @@
   }
 
   .headerLabel {
-    font-size: 36px;
+    font-size: 42px;
   }
 }
 
@@ -119,6 +119,6 @@
   }
 
   .headerLabel {
-    font-size: 28px;
+    font-size: 32px;
   }
 }
