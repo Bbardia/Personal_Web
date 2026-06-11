@@ -202,33 +202,32 @@
 
 @media (max-width: 1024px) {
   .hero {
-    flex-direction: column;
     padding: 48px 24px;
     min-height: auto;
   }
 
   .leftColumn {
-    padding-right: 0;
-    align-items: center;
-    text-align: center;
+    padding-right: 24px;
   }
 
   .headline {
-    font-size: 48px;
+    font-size: 44px;
+    letter-spacing: -1px;
+  }
+
+  .subtext {
+    font-size: 16px;
   }
 
   .rightColumn {
-    height: 500px;
-    width: 100%;
+    height: 460px;
   }
 
   .heroVideo {
     width: 100%;
-    max-width: 400px;
-    height: 500px;
-    left: 50%;
-    transform: translateX(-50%);
+    height: 100%;
     top: 0;
+    left: 0;
   }
 }
 
@@ -237,19 +236,30 @@
     padding: 32px 16px;
   }
 
+  .leftColumn {
+    padding-right: 16px;
+    gap: 16px;
+  }
+
   .headline {
-    font-size: 36px;
+    font-size: 28px;
   }
 
   .subtext {
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  .ctaButton {
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+
+  .socialIcon {
+    width: 36px;
+    height: 36px;
   }
 
   .rightColumn {
-    height: 350px;
-  }
-
-  .heroVideo {
-    height: 350px;
+    height: 320px;
   }
 }
