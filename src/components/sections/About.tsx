@@ -1,5 +1,5 @@
 import { Linkedin, Github } from 'lucide-react'
-import styles from '../../styles/sections/about.module.css'
+import styles from './About.module.css'
 
 const aboutSkills = ['Python', 'MATLAB', 'SolidWorks', 'Abaqus', 'TwinCAT', 'LaTeX']
 

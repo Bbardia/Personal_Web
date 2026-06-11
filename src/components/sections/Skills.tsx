@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { categories, stats } from '../../data/skills'
-import styles from '../../styles/sections/skills.module.css'
+import styles from './Skills.module.css'
 
 const iconMap: Record<string, LucideIcon> = {
   code: Code,
