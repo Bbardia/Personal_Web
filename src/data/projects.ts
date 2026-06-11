@@ -10,6 +10,7 @@ export interface Project {
   image: string
   tags: ProjectTag[]
   borderGradient: string
+  link?: string
 }
 
 export const projects: Project[] = [
@@ -27,6 +28,7 @@ export const projects: Project[] = [
     title: 'Sensopro Coordination',
     description: 'Coordination training devices for athletic performance',
     image: '/media/project-sensopro.png',
+    link: 'https://sensopro.swiss/ch-en/',
     tags: [
       { label: 'Sports', color: 'var(--accent-lime)', bgColor: '#B8FF0020' },
       { label: 'Tech', color: 'var(--accent-orange)', bgColor: '#FF6B3520' },
