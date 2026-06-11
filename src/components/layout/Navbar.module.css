@@ -36,6 +36,32 @@
   color: var(--text-white);
 }
 
+/* First-visit hint: draws attention to the Style link without shifting layout */
+.navLinkPulse {
+  color: #54FF7E;
+  padding: 6px 14px;
+  margin: -6px -14px;
+  border-radius: 100px;
+  border: 1px solid rgba(84, 255, 126, 0.5);
+  animation: stylePulse 2s ease-out infinite;
+}
+
+.navLinkPulse:hover {
+  color: #9DFFB6;
+}
+
+@keyframes stylePulse {
+  0% { box-shadow: 0 0 0 0 rgba(84, 255, 126, 0.45); }
+  70% { box-shadow: 0 0 0 10px rgba(84, 255, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(84, 255, 126, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navLinkPulse {
+    animation: none;
+  }
+}
+
 .navLinkAccent {
   composes: navLink;
   color: var(--accent-red);
