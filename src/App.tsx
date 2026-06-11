@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -7,8 +7,12 @@ import Skills from './components/sections/Skills'
 import StyleGallery from './components/sections/StyleGallery'
 import Contact from './components/sections/Contact'
 import RetroPage from './components/retro/RetroPage'
+import NovaLoader from './components/nova/NovaLoader'
 import { useInView } from './hooks/useIntersectionObserver'
 import type { SelectableStyleId } from './data/styles'
+
+// three.js is heavy — only people who enter Nova download it
+const NovaPage = lazy(() => import('./components/nova/NovaPage'))
 
 function FadeInSection({ children }: { children: React.ReactNode }) {
   const { ref, isVisible } = useInView(0.1)
@@ -26,6 +30,7 @@ type ActiveStyle = 'classic' | SelectableStyleId
 
 const styleFromHash = (): ActiveStyle => {
   if (window.location.hash === '#retro') return 'retro'
+  if (window.location.hash === '#nova') return 'nova'
   return 'classic'
 }
 
@@ -74,6 +79,14 @@ function App() {
 
   if (activeStyle === 'retro') {
     return <RetroPage onExit={exitStyle} />
+  }
+
+  if (activeStyle === 'nova') {
+    return (
+      <Suspense fallback={<NovaLoader />}>
+        <NovaPage onExit={exitStyle} />
+      </Suspense>
+    )
   }
 
   return (
