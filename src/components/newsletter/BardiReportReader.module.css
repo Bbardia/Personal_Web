@@ -1,0 +1,141 @@
+/* The newsletter "sheet" — authentic paper palette, ported from the email. */
+
+.sheet {
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  background: #f4f1ec;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  color: #14181f;
+  font-family: var(--font-body);
+}
+
+/* Dark masthead band */
+.heroBand {
+  background: #14181f;
+  padding: 40px 28px 32px 28px;
+}
+
+.wordmark {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -1.6px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+}
+
+.accent {
+  color: #ff4d2e;
+}
+
+.dateLine {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin: 14px 0 0 0;
+}
+
+.rule {
+  height: 1px;
+  background: #3a3f4a;
+  width: 100%;
+  margin: 22px 0 0 0;
+}
+
+.container {
+  padding: 28px 28px 8px 28px;
+}
+
+/* Quote banner */
+.quoteBanner {
+  margin: 0 0 24px 0;
+  padding: 22px 26px;
+  background: #ffffff;
+  border-left: 4px solid #ff4d2e;
+  border-radius: 0 14px 14px 0;
+  box-shadow: 0 2px 10px rgba(20, 24, 31, 0.05);
+}
+
+.quoteLabel {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: #ff4d2e;
+  margin: 0 0 12px 0;
+}
+
+.quoteText {
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+  color: #14181f;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.quoteAuthor {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6b6f7a;
+  margin: 0;
+  letter-spacing: 0.4px;
+}
+
+/* Intro */
+.intro {
+  background: #ffffff;
+  color: #2c313b;
+  padding: 22px 26px;
+  border-radius: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0 0 24px 0;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(20, 24, 31, 0.05);
+}
+
+/* Outro */
+.outro {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 18px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #2c313b;
+  margin: 8px 0 24px 0;
+  border: 1px dashed #d9d5cd;
+}
+
+.footer {
+  font-size: 12px;
+  color: #8a8e97;
+  text-align: center;
+  padding: 8px 0 20px 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .heroBand {
+    padding: 32px 18px 26px 18px;
+  }
+
+  .wordmark {
+    font-size: 30px;
+  }
+
+  .container {
+    padding: 22px 18px 4px 18px;
+  }
+
+  .quoteText {
+    font-size: 16px;
+  }
+}

@@ -5,8 +5,10 @@ import About from './components/sections/About'
 import Projects from './components/sections/Projects'
 import Skills from './components/sections/Skills'
 import StyleGallery from './components/sections/StyleGallery'
+import NewsletterTeaser from './components/sections/NewsletterTeaser'
 import Contact from './components/sections/Contact'
 import RetroPage from './components/retro/RetroPage'
+import NewsletterPage from './components/newsletter/NewsletterPage'
 import NovaLoader from './components/nova/NovaLoader'
 import { useInView } from './hooks/useIntersectionObserver'
 import type { SelectableStyleId } from './data/styles'
@@ -26,11 +28,12 @@ function FadeInSection({ children }: { children: React.ReactNode }) {
   )
 }
 
-type ActiveStyle = 'classic' | SelectableStyleId
+type ActiveView = 'classic' | SelectableStyleId | 'newsletter'
 
-const styleFromHash = (): ActiveStyle => {
+const viewFromHash = (): ActiveView => {
   if (window.location.hash === '#retro') return 'retro'
   if (window.location.hash === '#nova') return 'nova'
+  if (window.location.hash === '#newsletter') return 'newsletter'
   return 'classic'
 }
 
@@ -45,7 +48,7 @@ const styleHintSeen = () => {
 }
 
 function App() {
-  const [activeStyle, setActiveStyle] = useState<ActiveStyle>(styleFromHash)
+  const [activeView, setActiveView] = useState<ActiveView>(viewFromHash)
   // 'pending': nav link pulses → 'revealed': style card pulses → 'done' on later visits
   const [styleHint, setStyleHint] = useState<'pending' | 'revealed' | 'done'>(() =>
     styleHintSeen() ? 'done' : 'pending',
@@ -61,7 +64,7 @@ function App() {
   }
 
   useEffect(() => {
-    const onHashChange = () => setActiveStyle(styleFromHash())
+    const onHashChange = () => setActiveView(viewFromHash())
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
@@ -70,23 +73,34 @@ function App() {
     window.location.hash = id
   }
 
-  const exitStyle = () => {
-    history.replaceState(null, '', window.location.pathname + window.location.search)
-    setActiveStyle('classic')
-    // the classic page remounts at the top; bring the visitor back to where they left
-    setTimeout(() => document.getElementById('style')?.scrollIntoView(), 0)
+  const openNewsletter = () => {
+    window.location.hash = 'newsletter'
   }
 
-  if (activeStyle === 'retro') {
+  // return to the classic page and scroll back to where the visitor left
+  const returnToClassic = (anchorId: string) => {
+    history.replaceState(null, '', window.location.pathname + window.location.search)
+    setActiveView('classic')
+    setTimeout(() => document.getElementById(anchorId)?.scrollIntoView(), 0)
+  }
+
+  const exitStyle = () => returnToClassic('style')
+  const exitNewsletter = () => returnToClassic('newsletter-teaser')
+
+  if (activeView === 'retro') {
     return <RetroPage onExit={exitStyle} />
   }
 
-  if (activeStyle === 'nova') {
+  if (activeView === 'nova') {
     return (
       <Suspense fallback={<NovaLoader />}>
         <NovaPage onExit={exitStyle} />
       </Suspense>
     )
+  }
+
+  if (activeView === 'newsletter') {
+    return <NewsletterPage onExit={exitNewsletter} />
   }
 
   return (
@@ -97,6 +111,7 @@ function App() {
         <FadeInSection><About /></FadeInSection>
         <FadeInSection><Projects /></FadeInSection>
         <FadeInSection><Skills /></FadeInSection>
+        <FadeInSection><NewsletterTeaser onOpen={openNewsletter} /></FadeInSection>
         <FadeInSection>
           <StyleGallery
             onSelect={enterStyle}

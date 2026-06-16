@@ -1,0 +1,14 @@
+{
+  "name": "bardi-report-worker",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloudflare Worker that stores and serves the latest Bardi Report edition (R2-backed).",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.100.0"
+  }
+}
