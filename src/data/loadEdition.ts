@@ -24,7 +24,11 @@ import { latestEdition } from './bardiReport'
 import type { BardiCategory, BardiEdition, BardiStory } from './bardiReport'
 
 const configuredUrl: unknown = import.meta.env.VITE_BARDI_REPORT_URL
-export const REMOTE_URL = (typeof configuredUrl === 'string' ? configuredUrl : '').trim()
+const rawUrl = (typeof configuredUrl === 'string' ? configuredUrl : '').trim()
+// Tolerate a URL configured without a scheme (e.g. "host/latest.json"), which
+// would otherwise be treated as a relative path and fail.
+export const REMOTE_URL =
+  rawUrl && !/^https?:\/\//i.test(rawUrl) ? `https://${rawUrl}` : rawUrl
 export const HAS_REMOTE = REMOTE_URL.length > 0
 
 export type EditionSource = 'remote' | 'fallback'
