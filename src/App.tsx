@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -73,19 +73,29 @@ function App() {
     window.location.hash = id
   }
 
-  const openNewsletter = () => {
+  // Remembers where the newsletter page was opened from, so its Back button
+  // returns there: 'menu' (top nav) → top of page; 'teaser' (in-page card) →
+  // the teaser section.
+  const newsletterSource = useRef<'menu' | 'teaser'>('menu')
+
+  const openNewsletter = (source: 'menu' | 'teaser') => {
+    newsletterSource.current = source
     window.location.hash = 'newsletter'
   }
 
-  // return to the classic page and scroll back to where the visitor left
-  const returnToClassic = (anchorId: string) => {
+  // return to the classic page and scroll to the given target
+  const returnToClassic = (scrollTarget: 'top' | string) => {
     history.replaceState(null, '', window.location.pathname + window.location.search)
     setActiveView('classic')
-    setTimeout(() => document.getElementById(anchorId)?.scrollIntoView(), 0)
+    setTimeout(() => {
+      if (scrollTarget === 'top') window.scrollTo(0, 0)
+      else document.getElementById(scrollTarget)?.scrollIntoView()
+    }, 0)
   }
 
   const exitStyle = () => returnToClassic('style')
-  const exitNewsletter = () => returnToClassic('newsletter-teaser')
+  const exitNewsletter = () =>
+    returnToClassic(newsletterSource.current === 'menu' ? 'top' : 'newsletter-teaser')
 
   if (activeView === 'retro') {
     return <RetroPage onExit={exitStyle} />
@@ -105,13 +115,16 @@ function App() {
 
   return (
     <>
-      <Navbar pulseStyleLink={styleHint === 'pending'} />
+      <Navbar
+        pulseStyleLink={styleHint === 'pending'}
+        onOpenNewsletter={() => openNewsletter('menu')}
+      />
       <main>
         <Hero />
         <FadeInSection><About /></FadeInSection>
         <FadeInSection><Projects /></FadeInSection>
         <FadeInSection><Skills /></FadeInSection>
-        <FadeInSection><NewsletterTeaser onOpen={openNewsletter} /></FadeInSection>
+        <FadeInSection><NewsletterTeaser onOpen={() => openNewsletter('teaser')} /></FadeInSection>
         <FadeInSection>
           <StyleGallery
             onSelect={enterStyle}
