@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../../styles/components/navbar.module.css'
+import styles from './Navbar.module.css'
 
 const navLinks = [
   { label: 'About', href: '#about' },

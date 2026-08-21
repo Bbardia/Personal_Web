@@ -1,5 +1,5 @@
 import { Download, Linkedin, Github, Mail } from 'lucide-react'
-import styles from '../../styles/sections/hero.module.css'
+import styles from './Hero.module.css'
 
 export default function Hero() {
   return (

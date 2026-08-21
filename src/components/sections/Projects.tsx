@@ -1,5 +1,5 @@
 import { projects } from '../../data/projects'
-import styles from '../../styles/sections/projects.module.css'
+import styles from './Projects.module.css'
 
 export default function Projects() {
   return (
