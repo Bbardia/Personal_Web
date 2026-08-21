@@ -27,7 +27,7 @@ export default function BardiReportReader({ edition }: { edition: BardiEdition }
         <div className={styles.quoteBanner}>
           <span className={styles.quoteLabel}>Today's mantra</span>
           <p className={styles.quoteText}>&ldquo;{edition.quote.text}&rdquo;</p>
-          <p className={styles.quoteAuthor}>— {edition.quote.author}</p>
+          <p className={styles.quoteAuthor}>{edition.quote.author}</p>
         </div>
 
         <div className={styles.intro}>{edition.intro}</div>

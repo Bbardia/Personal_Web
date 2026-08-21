@@ -11,7 +11,7 @@ export default function Contact() {
         <h2 className={styles.title}>LET&apos;S BUILD WHAT&apos;S NEXT</h2>
         <p className={styles.subtitle}>
           Open to conversations about rehab-tech, machine learning, and human
-          movement — or the next detour worth taking.
+          movement, or the next detour worth taking.
         </p>
         <div className={styles.ctaRow}>
           <a href="mailto:bardiaamiryavari@gmail.com" className={styles.ctaPrimary}>

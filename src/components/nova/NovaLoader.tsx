@@ -19,7 +19,7 @@ export default function NovaLoader() {
       <div className={styles.barTrack}>
         <div className={styles.barFill} style={{ transform: `scaleX(${progress / 100})` }} />
       </div>
-      <span className={styles.percent}>{progress}% — ENTERING ORBIT</span>
+      <span className={styles.percent}>{progress}% · ENTERING ORBIT</span>
     </div>
   )
 }

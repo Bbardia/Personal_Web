@@ -34,7 +34,7 @@ export default function About() {
             <p className={styles.bioText}>
               I started my career behind a bakery counter; today I engineer
               ML-powered rehabilitation systems at Sensopro. Some call that job
-              drifting — I call knowing how to relearn a{' '}
+              drifting. I call knowing how to relearn a{' '}
               <span className={styles.highlight}>SUPERPOWER</span>. Every detour
               added a tool, and the CV reads like the proof.
             </p>

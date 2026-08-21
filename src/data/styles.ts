@@ -11,7 +11,7 @@ export const portfolioStyles: PortfolioStyle[] = [
   {
     id: 'classic',
     name: 'Classic',
-    tagline: 'The full experience — bold, dark & animated',
+    tagline: 'The full experience: bold, dark & animated',
     status: 'current',
   },
   {

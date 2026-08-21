@@ -45,7 +45,7 @@ export default function NovaChapters({ onExit }: NovaChaptersProps) {
             to medtech R&amp;D.
           </h2>
           <p className={styles.body}>
-            Career drift is a superpower — every detour adds a tool. Today I engineer
+            Career drift is a superpower: every detour adds a tool. Today I engineer
             ML-powered rehabilitation and coordination systems at Sensopro.
           </p>
         </Reveal>

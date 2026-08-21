@@ -89,7 +89,7 @@ export default function StyleGallery({
         <div className={styles.accentLine} />
         <h2 className={styles.titleText}>STYLE</h2>
         <p className={styles.subtitleText}>
-          One portfolio, every taste — pick how you want to see it
+          One portfolio, every taste. Pick how you want to see it
         </p>
       </div>
 

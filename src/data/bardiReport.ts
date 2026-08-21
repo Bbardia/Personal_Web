@@ -66,7 +66,7 @@ const UNSPLASH = (id: string) =>
 
 export const latestEdition: BardiEdition = {
   date: '2026-06-12',
-  subject: 'Bardi Report — Wearables that see injuries coming, and Swiss rehab tech scales up',
+  subject: 'Bardi Report: Wearables that see injuries coming, and Swiss rehab tech scales up',
   intro:
     "Happy Friday. This edition is heavy on the theme that keeps me up at night: " +
     "moving rehab from the clinic to anywhere a camera or sensor can reach. Six stories, " +
@@ -91,7 +91,7 @@ export const latestEdition: BardiEdition = {
       category: 'SWITZERLAND',
       summary:
         'A Zurich-based team closed a Series A to scale camera-based movement assessment for ' +
-        'post-op patients — no wearables, no clinic visit, just a phone propped against the wall.',
+        'post-op patients: no wearables, no clinic visit, just a phone propped against the wall.',
       sourceUrl: 'https://www.swissinfo.ch/eng/sci-tech/',
       sourceName: 'SWI swissinfo',
       imageUrl: UNSPLASH('1527668752968-14dc70a27c95'),
@@ -112,7 +112,7 @@ export const latestEdition: BardiEdition = {
       category: 'INNOVATION',
       summary:
         'A peer-reviewed benchmark puts multi-camera markerless tracking within a degree of ' +
-        'marker-based gold standards for lower-limb kinematics — the validation gait labs were waiting for.',
+        'marker-based gold standards for lower-limb kinematics, the validation gait labs were waiting for.',
       sourceUrl: 'https://spectrum.ieee.org/',
       sourceName: 'IEEE Spectrum',
       imageUrl: UNSPLASH('1581090700227-1e37b190418e'),
@@ -139,6 +139,6 @@ export const latestEdition: BardiEdition = {
     },
   ],
   outro:
-    "That's the lot. If one of these sparked a thought — reply and tell me I'm wrong. " +
-    'See you Tuesday. — Bardi',
+    "That's the lot. If one of these sparked a thought, reply and tell me I'm wrong. " +
+    'See you Tuesday. Bardi',
 }
