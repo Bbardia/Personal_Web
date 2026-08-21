@@ -1,0 +1,104 @@
+.contact {
+  position: relative;
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.topDeco {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-orange), var(--accent-cyan));
+}
+
+.divider {
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0 auto;
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 120px;
+}
+
+.footerLeft,
+.footerRight {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footerCenter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.footLogo {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+}
+
+.bottomDeco {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-lime), var(--accent-orange));
+}
+
+/* Decorative elements */
+.decoLine1 {
+  position: absolute;
+  width: 3px;
+  height: 200px;
+  background: var(--accent-red);
+  opacity: 0.15;
+  transform: rotate(25deg);
+  right: 190px;
+  top: 100px;
+}
+
+.decoLine2 {
+  position: absolute;
+  width: 2px;
+  height: 160px;
+  background: var(--accent-cyan);
+  opacity: 0.1;
+  transform: rotate(25deg);
+  right: 160px;
+  top: 80px;
+}
+
+.decoCircle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  opacity: 0.06;
+  right: 140px;
+  top: 400px;
+}
+
+@media (max-width: 1024px) {
+  .footerRow {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+}

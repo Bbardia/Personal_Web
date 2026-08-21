@@ -1,89 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>Bardia</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="personal webpage">
-    <meta name="keywords" content="bardia, bmiryavari, pose estimation, bardia amiryavari, biomechanics, computer vision">
-    <meta name="author" content="Bardia Amiryavari">
-    <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bardia Amiryavari — Biomedical Engineer specializing in Biomechanics, AI in Rehabilitation, and Mechatronic Systems" />
+    <meta name="keywords" content="bardia, amiryavari, biomedical engineer, biomechanics, pose estimation, computer vision, rehabilitation" />
+    <meta name="author" content="Bardia Amiryavari" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; script-src 'self'; connect-src 'self'" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>Bardia Amiryavari</title>
   </head>
   <body>
-    <section id="hero">
-      <header>
-        <div class="nav-toggle">
-          <p>Menu</p><span></span>
-        </div>
-        <ul class="nav">
-          <li><a href="#about">About</a></li>
-          <li><a href="#full-slide">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </header>
-      <div class="wrapper">
-        <div class="welcome">
-          <h1><strong>Welcome To My World</strong></h1>
-          <a href="assets/CV.pdf" download class="cv-download" style="display: inline-block; margin-top: 10px; text-decoration: none; font-size: 20px;">
-            <i class="fa-solid fa-download"></i> Download CV
-          </a>
-          <p>Hey I'm Bardia, nice of you to visit me. Some call us job drifters, but I think having the skills to switch your skills is a SUPERPOWER. Take a look at my CV and you'll find I started my career in a bakery! 
-            but do not fear as now you have a Biomedical Engineer infront of you!</p>
-        </div>
-        <div class="photographer">
-          <video autoplay muted loop>
-            <source src="assets/img/hero.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <div class="wrapper">
-        <div class="photographer">
-          <video autoplay muted loop>
-            <source src="assets/img/Media2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="blurb">
-          <h2>My name is <strong>Bardia Amiryavari</strong></h2>
-          <p>I specialize in Biomechanics, AI in Rehabilitation, Mechatronic Systems and have worked on various projects involving Pose Estimation, Robotic Assisted Rehabilitation, Movement Analysis.
-             My skills include Python, MATLAB, SolidWorks, Abaqus, Twin CAT, LaTeX and many more so no boring you out.</p>
-          <div class="social" style="display: flex; gap: 5px;">
-            <a href="https://www.linkedin.com/in/bardia-amiryavari" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://github.com/bbardia" target="_blank"><i class="fa-brands fa-github"></i></a>
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-    <section id="full-slide">
-      <ul class="banner">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul><i class="icon-chevron-thin-left prev"></i><i class="icon-chevron-thin-right next"></i>
-    </section>
-    <section id="contact">
-      <div class="wrapper">
-        <div class="blurb">
-          <h2><strong>Say</strong> Hello</h2>
-          <p>Contact me at <strong>bardiaamiryavari@gmail.com</strong> for further questions or to discuss potential projects.</p>
-        </div>
-        <form>
-          <input type="email" placeholder="Your Email">
-          <input type="text" placeholder="Subject">
-          <textarea placeholder="Message"></textarea>
-          <input type="submit" value="Send Message">
-        </form>
-      </div>
-      <p class="copyright">&copy; Bardia 2025</p>
-    </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
-    <script src="assets/js/functions-min.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
