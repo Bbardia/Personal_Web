@@ -32,13 +32,14 @@ export const categories: SkillCategory[] = [
       { name: 'SolidWorks', icon: 'box', color: 'var(--accent-lime)' },
       { name: 'Abaqus', icon: 'grid-3x3', color: 'var(--accent-orange)' },
       { name: 'React', icon: 'code', color: 'var(--accent-purple)' },
+      { name: 'Electron', icon: 'atom', color: 'var(--accent-cyan)' },
     ],
   },
   {
     label: 'DevOps',
     color: 'var(--accent-lime)',
     skills: [
-      { name: 'TwinCAT', icon: 'cpu', color: 'var(--accent-purple)' },
+      { name: 'Azure', icon: 'cloud', color: 'var(--accent-purple)' },
       { name: 'Git', icon: 'git-branch', color: 'var(--accent-orange)' },
       { name: 'Docker', icon: 'container', color: 'var(--accent-cyan)' },
       { name: 'Linux', icon: 'terminal', color: 'var(--accent-lime)' },

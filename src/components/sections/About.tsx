@@ -1,7 +1,7 @@
 import { Linkedin, Github } from 'lucide-react'
 import styles from './About.module.css'
 
-const aboutSkills = ['Python', 'MATLAB', 'SolidWorks', 'Abaqus', 'TwinCAT', 'LaTeX']
+const aboutSkills = ['Python', 'React', 'Electron', 'DevOps', 'MATLAB', 'SolidWorks']
 
 export default function About() {
   return (

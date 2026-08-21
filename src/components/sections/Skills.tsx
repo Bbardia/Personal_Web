@@ -3,7 +3,7 @@ import {
   Code, Calculator, Box, Grid3x3, Cpu, FileText,
   Eye, Brain, Activity, Scan, Cog, HeartPulse,
   GitBranch, Container, Terminal, Search, BookOpen, BarChart3,
-  Circle,
+  Atom, Cloud, Circle,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { categories, stats } from '../../data/skills'
@@ -28,6 +28,8 @@ const iconMap: Record<string, LucideIcon> = {
   search: Search,
   'book-open': BookOpen,
   'bar-chart-3': BarChart3,
+  atom: Atom,
+  cloud: Cloud,
 }
 
 export default function Skills() {
