@@ -27,7 +27,7 @@
 
 .labelText {
   font-family: var(--font-heading);
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 3px;
   color: var(--accent-red);
