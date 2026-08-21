@@ -1,0 +1,96 @@
+.sprites {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sprite {
+  position: relative;
+  filter: drop-shadow(0 0 3px rgba(84, 255, 126, 0.35));
+}
+
+.spritePixels {
+  position: absolute;
+  display: block;
+}
+
+/* Frame toggling for chomp / run cycles */
+.flip {
+  position: relative;
+}
+
+.flip > :first-child {
+  animation: showFrameA 0.5s steps(1) infinite;
+}
+
+.flipFrameB {
+  position: absolute;
+  inset: 0;
+  animation: showFrameB 0.5s steps(1) infinite;
+}
+
+@keyframes showFrameA {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes showFrameB {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Pac-Man chasing a ghost, upper screen, left to right */
+.chase {
+  position: absolute;
+  top: 11%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  animation: crossLR 17s linear infinite;
+}
+
+/* A dim ghost drifting back the other way, lower screen */
+.ghostDrift {
+  position: absolute;
+  bottom: 18%;
+  left: 0;
+  animation: crossRL 27s linear infinite;
+  animation-delay: -9s;
+}
+
+/* Dino scampering along the bottom edge */
+.dinoRun {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  animation: crossLR 23s linear infinite;
+  animation-delay: -14s;
+}
+
+.bob {
+  animation: bob 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes crossLR {
+  from { transform: translateX(-20vw); }
+  to { transform: translateX(115vw); }
+}
+
+@keyframes crossRL {
+  from { transform: translateX(115vw); }
+  to { transform: translateX(-20vw); }
+}
+
+@keyframes bob {
+  from { transform: translateY(-4px); }
+  to { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sprites {
+    display: none;
+  }
+}

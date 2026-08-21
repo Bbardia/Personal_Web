@@ -5,9 +5,14 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Style', href: '#style' },
 ]
 
-export default function Navbar() {
+interface NavbarProps {
+  pulseStyleLink?: boolean
+}
+
+export default function Navbar({ pulseStyleLink = false }: NavbarProps) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -25,7 +30,9 @@ export default function Navbar() {
           <a
             key={link.label}
             href={link.href}
-            className={styles.navLink}
+            className={`${styles.navLink} ${
+              pulseStyleLink && link.href === '#style' ? styles.navLinkPulse : ''
+            }`}
             onClick={(e) => handleClick(e, link.href)}
           >
             {link.label}
