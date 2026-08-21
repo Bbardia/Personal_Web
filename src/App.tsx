@@ -10,11 +10,13 @@ import Contact from './components/sections/Contact'
 import RetroPage from './components/retro/RetroPage'
 import NewsletterPage from './components/newsletter/NewsletterPage'
 import NovaLoader from './components/nova/NovaLoader'
+import SagaLoader from './components/saga/SagaLoader'
 import { useInView } from './hooks/useIntersectionObserver'
 import type { SelectableStyleId } from './data/styles'
 
-// three.js is heavy — only people who enter Nova download it
+// three.js is heavy — only people who enter Nova or the Saga download it
 const NovaPage = lazy(() => import('./components/nova/NovaPage'))
+const SagaPage = lazy(() => import('./components/saga/SagaPage'))
 
 function FadeInSection({ children }: { children: React.ReactNode }) {
   const { ref, isVisible } = useInView(0.1)
@@ -33,6 +35,7 @@ type ActiveView = 'classic' | SelectableStyleId | 'newsletter'
 const viewFromHash = (): ActiveView => {
   if (window.location.hash === '#retro') return 'retro'
   if (window.location.hash === '#nova') return 'nova'
+  if (window.location.hash === '#saga') return 'saga'
   if (window.location.hash === '#newsletter') return 'newsletter'
   return 'classic'
 }
@@ -84,16 +87,27 @@ function App() {
   }
 
   // return to the classic page and scroll to the given target
-  const returnToClassic = (scrollTarget: 'top' | string) => {
+  const returnToClassic = (scrollTarget: 'top' | string, focusSelector?: string) => {
     history.replaceState(null, '', window.location.pathname + window.location.search)
     setActiveView('classic')
     setTimeout(() => {
       if (scrollTarget === 'top') window.scrollTo(0, 0)
       else document.getElementById(scrollTarget)?.scrollIntoView()
+      if (focusSelector) {
+        requestAnimationFrame(() => {
+          document.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true })
+        })
+      }
     }, 0)
   }
 
-  const exitStyle = () => returnToClassic('style')
+  const exitStyle = () => {
+    const styleId =
+      activeView === 'retro' || activeView === 'nova' || activeView === 'saga'
+        ? activeView
+        : null
+    returnToClassic('style', styleId ? `[data-style-id="${styleId}"]` : undefined)
+  }
   const exitNewsletter = () =>
     returnToClassic(newsletterSource.current === 'menu' ? 'top' : 'newsletter-teaser')
 
@@ -105,6 +119,14 @@ function App() {
     return (
       <Suspense fallback={<NovaLoader />}>
         <NovaPage onExit={exitStyle} />
+      </Suspense>
+    )
+  }
+
+  if (activeView === 'saga') {
+    return (
+      <Suspense fallback={<SagaLoader />}>
+        <SagaPage onExit={exitStyle} />
       </Suspense>
     )
   }

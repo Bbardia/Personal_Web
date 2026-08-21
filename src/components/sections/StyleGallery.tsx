@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { portfolioStyles } from '../../data/styles'
 import type { PortfolioStyle, SelectableStyleId } from '../../data/styles'
 import { useInView } from '../../hooks/useIntersectionObserver'
+import SagaCrest from '../saga/SagaCrest'
 import styles from './StyleGallery.module.css'
 
 interface StyleGalleryProps {
@@ -46,6 +47,16 @@ function CardPreview({ id }: { id: PortfolioStyle['id'] }) {
         <span className={styles.novaRing} />
         <span className={styles.novaOrb} />
         <span className={styles.novaWord}>NOVA</span>
+      </div>
+    )
+  }
+  if (id === 'saga') {
+    return (
+      <div className={`${styles.preview} ${styles.previewSaga}`}>
+        <span className={styles.sagaEmber} />
+        <span className={styles.sagaEmberB} />
+        <SagaCrest className={styles.sagaCrest} />
+        <span className={styles.sagaWord}>SAGA</span>
       </div>
     )
   }
@@ -109,6 +120,7 @@ export default function StyleGallery({
             return (
               <button
                 key={style.id}
+                data-style-id={style.id}
                 className={`${styles.card} ${styles.cardClickable} ${
                   pulseCard ? styles.cardPulse : ''
                 }`}

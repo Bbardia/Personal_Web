@@ -1,4 +1,4 @@
-export type SelectableStyleId = 'retro' | 'nova'
+export type SelectableStyleId = 'retro' | 'nova' | 'saga'
 
 export interface PortfolioStyle {
   id: 'classic' | SelectableStyleId | 'soon'
@@ -24,6 +24,12 @@ export const portfolioStyles: PortfolioStyle[] = [
     id: 'nova',
     name: 'Nova 3D',
     tagline: 'A futuristic 3D journey. Scroll to fly.',
+    status: 'available',
+  },
+  {
+    id: 'saga',
+    name: 'Knight’s Saga',
+    tagline: 'A scroll-driven 3D quest through the work.',
     status: 'available',
   },
   {

@@ -20,4 +20,17 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // The saga style animates three.js objects imperatively inside useFrame —
+    // react-three-fiber's sanctioned escape hatch. react-hooks v7's purity
+    // rules can't model that (every uniform write is a "mutation"), so they
+    // are off for this directory only.
+    files: ['src/components/saga/**/*.{ts,tsx}'],
+    rules: {
+      'react-hooks/immutability': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/incompatible-library': 'off',
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
