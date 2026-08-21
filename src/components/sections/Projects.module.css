@@ -41,12 +41,51 @@
   flex: 1;
   padding: 2px;
   border-radius: var(--radius-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cardWrapper:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+/* only linked cards lift */
+a.cardWrapper {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.cardWrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+}
+
+a.cardWrapper:active {
+  transform: translateY(-1px);
+}
+
+/* Reveal cascade — an animation, not a transition: it releases transform/opacity
+   on finish, so it can't fight the hover/press transforms above. */
+:global(.fadeIn:not(.visible)) .cardWrapper {
+  opacity: 0;
+}
+
+:global(.fadeIn.visible) .cardWrapper {
+  animation: cardCascade 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+:global(.fadeIn.visible) .cardWrapper:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+:global(.fadeIn.visible) .cardWrapper:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+@keyframes cardCascade {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* no movement, no stagger — the parent's single opacity fade carries the reveal */
+  :global(.fadeIn.visible) .cardWrapper {
+    animation: none;
+  }
 }
 
 .card {

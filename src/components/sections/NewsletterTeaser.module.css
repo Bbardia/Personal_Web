@@ -52,9 +52,18 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
   border-color: var(--accent-orange);
   box-shadow: 0 12px 40px rgba(255, 107, 53, 0.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.card:active {
+  transform: translateY(-1px);
 }
 
 /* Left: dark masthead block echoing the newsletter identity */
@@ -125,11 +134,17 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--accent-orange);
-  transition: gap 0.2s ease;
 }
 
-.card:hover .cta {
-  gap: 12px;
+/* nudge the arrow, not the layout: gap is a layout property */
+.cta svg {
+  transition: transform 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .cta svg {
+    transform: translateX(4px);
+  }
 }
 
 @media (max-width: 768px) {

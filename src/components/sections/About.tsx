@@ -1,6 +1,8 @@
 import { Linkedin, Github } from 'lucide-react'
 import styles from './About.module.css'
 
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 const aboutSkills = ['Python', 'React', 'Electron', 'DevOps', 'MATLAB', 'SolidWorks']
 
 export default function About() {
@@ -16,10 +18,11 @@ export default function About() {
           <div className={styles.photoColumn}>
             <video
               src="/media/about.mp4"
-              autoPlay
+              autoPlay={!REDUCED_MOTION}
               muted
               loop
               playsInline
+              preload={REDUCED_MOTION ? 'metadata' : 'auto'}
               className={styles.photo}
             />
             <div className={styles.photoBorder} />
@@ -29,12 +32,11 @@ export default function About() {
             <h2 className={styles.heading}>Hello, I'm Bardia</h2>
 
             <p className={styles.bioText}>
-              Hey I'm Bardia, nice of you to visit me. Some call us job
-              drifters, but I think having the skills to switch your skills is
-              a <span className={styles.highlight}>SUPERPOWER</span>. Take a
-              look at my CV and you'll find I started my career in a bakery!
-              but do not fear as now you have a Biomedical Engineer infront of
-              you!
+              I started my career behind a bakery counter; today I engineer
+              ML-powered rehabilitation systems at Sensopro. Some call that job
+              drifting — I call knowing how to relearn a{' '}
+              <span className={styles.highlight}>SUPERPOWER</span>. Every detour
+              added a tool, and the CV reads like the proof.
             </p>
 
             <span className={styles.skillsLabel}>SKILLS &amp; TOOLS</span>

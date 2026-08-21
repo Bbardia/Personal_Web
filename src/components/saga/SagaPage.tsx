@@ -123,6 +123,7 @@ export default function SagaPage({ onExit }: SagaPageProps) {
   const scrollElRef = useRef<HTMLElement | null>(null)
   const scrollCleanupRef = useRef<(() => void) | null>(null)
   const hudRef = useRef<HTMLDivElement>(null)
+  const fillRef = useRef<HTMLSpanElement>(null)
   // the lazy chunk's Suspense loader ends before the 3.8MB of models arrive —
   // keep the boot screen up while DefaultLoadingManager still has work
   const { active: loading } = useProgress()
@@ -180,7 +181,8 @@ export default function SagaPage({ onExit }: SagaPageProps) {
 
     const updateProgress = () => {
       const max = Math.max(1, el.scrollHeight - el.clientHeight)
-      hudRef.current?.style.setProperty('--saga-progress', `${el.scrollTop / max}`)
+      // var lives on the fill itself: no HUD-subtree style recalc per scroll frame
+      fillRef.current?.style.setProperty('--saga-progress', `${el.scrollTop / max}`)
     }
     el.addEventListener('scroll', updateProgress, { passive: true })
     updateProgress()
@@ -237,7 +239,7 @@ export default function SagaPage({ onExit }: SagaPageProps) {
 
           <nav className={styles.dots} aria-label="Acts">
             <span className={styles.progressTrack} aria-hidden="true">
-              <span className={styles.progressFill} />
+              <span ref={fillRef} className={styles.progressFill} />
             </span>
             {ACT_NAMES.map((label, i) => (
               <button
@@ -259,7 +261,7 @@ export default function SagaPage({ onExit }: SagaPageProps) {
             <strong>{ACT_NAMES[act]}</strong>
           </div>
 
-          <span className={styles.hint} hidden={act !== 0}>
+          <span className={`${styles.hint} ${act === 0 ? '' : styles.hintHidden}`}>
             SCROLL TO RIDE
             <span className={styles.hintArrow}>▾</span>
           </span>

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Code, Calculator, Box, Grid3x3, Cpu, FileText,
   Eye, Brain, Activity, Scan, Cog, HeartPulse,
@@ -7,7 +7,37 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { categories, stats } from '../../data/skills'
+import { useInView } from '../../hooks/useIntersectionObserver'
 import styles from './Skills.module.css'
+
+/* counts "10+"-style values up from 0 once the stats bar scrolls into view */
+function StatValue({ value, color, active }: { value: string; color: string; active: boolean }) {
+  const [display, setDisplay] = useState(value)
+
+  useEffect(() => {
+    const match = /^(\d+)(.*)$/.exec(value)
+    if (!active || !match) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const end = Number(match[1])
+    const suffix = match[2]
+    const start = performance.now()
+    let raf = 0
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / 900)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setDisplay(`${Math.round(end * eased)}${suffix}`)
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [active, value])
+
+  return (
+    <span className={styles.statValue} style={{ color }}>
+      {display}
+    </span>
+  )
+}
 
 const iconMap: Record<string, LucideIcon> = {
   code: Code,
@@ -34,7 +64,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function Skills() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const panelRef = useRef<HTMLDivElement>(null)
+  const { ref: statsRef, isVisible: statsInView } = useInView(0.4)
 
   const activeCat = categories[activeIndex]
 
@@ -54,40 +84,43 @@ export default function Skills() {
           const isActive = activeIndex === i
           const FirstIcon = iconMap[cat.skills[0].icon] || Circle
           return (
-            <div
+            <button
               key={cat.label}
+              type="button"
               className={`${styles.tile} ${isActive ? styles.tileActive : ''}`}
               style={{
                 borderColor: isActive ? cat.color : undefined,
                 '--tile-color': cat.color,
               } as React.CSSProperties}
+              aria-pressed={isActive}
+              onClick={() => setActiveIndex(i)}
+              onFocus={() => setActiveIndex(i)}
               onMouseEnter={() => setActiveIndex(i)}
             >
               <FirstIcon size={24} color={cat.color} />
               <span className={styles.tileLabel}>{cat.label}</span>
-            </div>
+            </button>
           )
         })}
       </div>
 
-      {/* Skills Panel */}
-      <div
-        ref={panelRef}
-        className={`${styles.skillsPanel} ${styles.skillsPanelOpen}`}
-      >
-        <span className={styles.panelLabel} style={{ color: activeCat.color }}>
-          {activeCat.label}
-        </span>
-        <div className={styles.skillRow}>
-          {activeCat.skills.map((skill) => {
-            const Icon = iconMap[skill.icon] || Circle
-            return (
-              <div key={skill.name} className={styles.skillCard}>
-                <Icon size={28} color={skill.color} />
-                <span className={styles.skillLabel}>{skill.name}</span>
-              </div>
-            )
-          })}
+      {/* Skills Panel — keyed wrapper crossfades when the category changes */}
+      <div className={styles.skillsPanel}>
+        <div key={activeCat.label} className={styles.panelSwap}>
+          <span className={styles.panelLabel} style={{ color: activeCat.color }}>
+            {activeCat.label}
+          </span>
+          <div className={styles.skillRow}>
+            {activeCat.skills.map((skill) => {
+              const Icon = iconMap[skill.icon] || Circle
+              return (
+                <div key={skill.name} className={styles.skillCard}>
+                  <Icon size={28} color={skill.color} />
+                  <span className={styles.skillLabel}>{skill.name}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
 
@@ -103,13 +136,11 @@ export default function Skills() {
       </div>
 
       {/* Stats Bar */}
-      <div className={styles.statsBar}>
+      <div ref={statsRef as React.RefObject<HTMLDivElement>} className={styles.statsBar}>
         {stats.map((stat, i) => {
           const content = (
             <>
-              <span className={styles.statValue} style={{ color: stat.color }}>
-                {stat.value}
-              </span>
+              <StatValue value={stat.value} color={stat.color} active={statsInView} />
               <span className={styles.statLabel}>{stat.label}</span>
             </>
           )

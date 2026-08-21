@@ -84,8 +84,8 @@
   font-size: 9px;
   font-weight: 400;
   letter-spacing: 5px;
-  color: #6B7494;
-  transition: opacity 0.6s ease;
+  color: #99A3C4;
+  transition: opacity 0.4s ease, visibility 0s;
 }
 
 .hintArrow {
@@ -94,8 +94,11 @@
   animation: hintBounce 1.6s ease-in-out infinite;
 }
 
+/* visibility flips after the fade so the hidden bob stops rendering */
 .hintHidden {
   opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
 }
 
 @keyframes hintBounce {
@@ -217,10 +220,10 @@
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
+/* not clickable — glow only, no lift */
 .chip:hover {
   border-color: #00D4FF;
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
-  transform: translateY(-2px);
 }
 
 .workList {
@@ -272,9 +275,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ctaPrimary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(0, 212, 255, 0.55);
+@media (hover: hover) and (pointer: fine) {
+  .ctaPrimary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.55);
+  }
+}
+
+.ctaPrimary:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .ctaGhost {
@@ -355,6 +364,17 @@
 }
 
 /* ---------- Responsive ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .hintArrow {
+    animation: none;
+  }
+}
 
 @media (max-width: 768px) {
   .exit {

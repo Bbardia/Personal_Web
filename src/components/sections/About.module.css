@@ -137,30 +137,6 @@
 }
 
 /* Decorative elements */
-.decoTri1 {
-  position: absolute;
-  top: 40px;
-  right: 140px;
-  width: 0;
-  height: 0;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  border-bottom: 80px solid var(--accent-red);
-  opacity: 0.08;
-}
-
-.decoTri2 {
-  position: absolute;
-  top: 130px;
-  right: 90px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid var(--accent-orange);
-  opacity: 0.12;
-}
-
 .decoCircle {
   position: absolute;
   top: 250px;

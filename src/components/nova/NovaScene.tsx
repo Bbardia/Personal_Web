@@ -27,16 +27,19 @@ function CameraRig({ reduced, onChapterChange, onScrollEl }: RigProps) {
     onScrollEl(scroll.el)
   }, [scroll.el, onScrollEl])
 
-  useFrame(({ camera, pointer }) => {
+  useFrame(({ camera, pointer }, delta) => {
     const t = scroll.offset
     camera.position.z = 7 - t * FLIGHT
 
+    // delta-time damping: same parallax feel at any refresh rate; rotation is
+    // smoothed with position instead of snapping to the pointer
     const px = reduced ? 0 : pointer.x
     const py = reduced ? 0 : pointer.y
-    camera.position.x += (px * 0.7 - camera.position.x) * 0.06
-    camera.position.y += (-py * 0.45 - camera.position.y) * 0.06
-    camera.rotation.y = -px * 0.05
-    camera.rotation.x = py * 0.03
+    const k = 1 - Math.exp(-delta * 3.7)
+    camera.position.x += (px * 0.7 - camera.position.x) * k
+    camera.position.y += (-py * 0.45 - camera.position.y) * k
+    camera.rotation.y += (-px * 0.05 - camera.rotation.y) * k
+    camera.rotation.x += (py * 0.03 - camera.rotation.x) * k
 
     const i = Math.round(t * (scroll.pages - 1))
     if (i !== chapterRef.current) {

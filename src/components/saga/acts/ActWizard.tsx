@@ -129,7 +129,7 @@ export default function ActWizard() {
   const BOLT_FROM = useMemo(() => new THREE.Vector3(0, 1.9, -0.3), [])
   const BOLT_TO = useMemo(() => new THREE.Vector3(1.25, 0.5, 2.7), [])
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock }, dt) => {
     if (!ref.current?.visible) return
     const hold = prog.current.hold
 
@@ -149,10 +149,11 @@ export default function ActWizard() {
     }
 
     // once the sight is shared, the constellation burns brighter
+    // delta-time damp: identical settle at any refresh rate
     const seen = hold >= 0.85
-    crystalMat.emissiveIntensity = THREE.MathUtils.lerp(crystalMat.emissiveIntensity, seen ? 2.6 : 1.1, 0.06)
-    constellation.jointMat.opacity = THREE.MathUtils.lerp(constellation.jointMat.opacity, seen ? 1 : 0.75, 0.06)
-    constellation.boneMat.opacity = THREE.MathUtils.lerp(constellation.boneMat.opacity, seen ? 0.95 : 0.55, 0.06)
+    crystalMat.emissiveIntensity = THREE.MathUtils.damp(crystalMat.emissiveIntensity, seen ? 2.6 : 1.1, 3.7, dt)
+    constellation.jointMat.opacity = THREE.MathUtils.damp(constellation.jointMat.opacity, seen ? 1 : 0.75, 3.7, dt)
+    constellation.boneMat.opacity = THREE.MathUtils.damp(constellation.boneMat.opacity, seen ? 0.95 : 0.55, 3.7, dt)
 
     if (REDUCED) return
     const t = clock.elapsedTime

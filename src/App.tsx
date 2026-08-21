@@ -18,8 +18,13 @@ import type { SelectableStyleId } from './data/styles'
 const NovaPage = lazy(() => import('./components/nova/NovaPage'))
 const SagaPage = lazy(() => import('./components/saga/SagaPage'))
 
-function FadeInSection({ children }: { children: React.ReactNode }) {
+function FadeInSection({ children, instant }: { children: React.ReactNode; instant?: boolean }) {
   const { ref, isVisible } = useInView(0.1)
+  // instant: no .fadeIn class at all, so the per-child stagger selectors
+  // (:global(.fadeIn…)) can't re-hide content either
+  if (instant) {
+    return <div>{children}</div>
+  }
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
@@ -52,6 +57,9 @@ const styleHintSeen = () => {
 
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>(viewFromHash)
+  // Returning from a world skips the scroll-reveals — the landing viewport would
+  // otherwise sit opacity-0 (black) until observers fire and the fade completes.
+  const [skipReveals, setSkipReveals] = useState(false)
   // 'pending': nav link pulses → 'revealed': style card pulses → 'done' on later visits
   const [styleHint, setStyleHint] = useState<'pending' | 'revealed' | 'done'>(() =>
     styleHintSeen() ? 'done' : 'pending',
@@ -67,7 +75,12 @@ function App() {
   }
 
   useEffect(() => {
-    const onHashChange = () => setActiveView(viewFromHash())
+    const onHashChange = () => {
+      const next = viewFromHash()
+      // covers the browser-Back exit path, which bypasses returnToClassic
+      if (next === 'classic') setSkipReveals(true)
+      setActiveView(next)
+    }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
@@ -89,10 +102,12 @@ function App() {
   // return to the classic page and scroll to the given target
   const returnToClassic = (scrollTarget: 'top' | string, focusSelector?: string) => {
     history.replaceState(null, '', window.location.pathname + window.location.search)
+    setSkipReveals(true)
     setActiveView('classic')
     setTimeout(() => {
-      if (scrollTarget === 'top') window.scrollTo(0, 0)
-      else document.getElementById(scrollTarget)?.scrollIntoView()
+      // exiting a world is a system response (and reachable via Escape) — snap, never animate
+      if (scrollTarget === 'top') window.scrollTo({ top: 0, behavior: 'instant' })
+      else document.getElementById(scrollTarget)?.scrollIntoView({ behavior: 'instant' })
       if (focusSelector) {
         requestAnimationFrame(() => {
           document.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true })
@@ -143,11 +158,13 @@ function App() {
       />
       <main>
         <Hero />
-        <FadeInSection><About /></FadeInSection>
-        <FadeInSection><Projects /></FadeInSection>
-        <FadeInSection><Skills /></FadeInSection>
-        <FadeInSection><NewsletterTeaser onOpen={() => openNewsletter('teaser')} /></FadeInSection>
-        <FadeInSection>
+        <FadeInSection instant={skipReveals}><About /></FadeInSection>
+        <FadeInSection instant={skipReveals}><Projects /></FadeInSection>
+        <FadeInSection instant={skipReveals}><Skills /></FadeInSection>
+        <FadeInSection instant={skipReveals}>
+          <NewsletterTeaser onOpen={() => openNewsletter('teaser')} />
+        </FadeInSection>
+        <FadeInSection instant={skipReveals}>
           <StyleGallery
             onSelect={enterStyle}
             hintActive={styleHint === 'pending'}
@@ -155,7 +172,7 @@ function App() {
             onHintSeen={revealStyleHint}
           />
         </FadeInSection>
-        <FadeInSection><Contact /></FadeInSection>
+        <FadeInSection instant={skipReveals}><Contact /></FadeInSection>
       </main>
     </>
   )

@@ -1,6 +1,8 @@
 import { Download, Linkedin, Github, Mail } from 'lucide-react'
 import styles from './Hero.module.css'
 
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
@@ -50,10 +52,11 @@ export default function Hero() {
       <div className={styles.rightColumn}>
         <video
           src="/media/hero.mp4"
-          autoPlay
+          autoPlay={!REDUCED_MOTION}
           muted
           loop
           playsInline
+          preload={REDUCED_MOTION ? 'metadata' : 'auto'}
           className={styles.heroVideo}
         />
         <div className={`${styles.diagonalAccent} ${styles.accent1}`} />

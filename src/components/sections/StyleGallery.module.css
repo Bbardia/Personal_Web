@@ -64,9 +64,18 @@
 }
 
 .cardClickable:hover {
-  transform: translateY(-4px);
   border-color: #54FF7E;
   box-shadow: 0 8px 32px rgba(84, 255, 126, 0.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cardClickable:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.cardClickable:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .cardSoon {
@@ -94,8 +103,60 @@
   }
 }
 
+/* Section reveal: the five cards cascade in behind the parent fade.
+   An animation (not a transition) so it releases transform/opacity when done
+   and can't fight the hover/press transforms or .cardSoon's dimmed opacity. */
+:global(.fadeIn:not(.visible)) .card {
+  opacity: 0;
+}
+
+:global(.fadeIn.visible) .card {
+  animation: galleryCascade 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* stagger skips pulsing cards so the first-visit pulse keeps its own timing */
+:global(.fadeIn.visible) .card:not(.cardPulse):nth-child(2) {
+  animation-delay: 60ms;
+}
+
+:global(.fadeIn.visible) .card:not(.cardPulse):nth-child(3) {
+  animation-delay: 120ms;
+}
+
+:global(.fadeIn.visible) .card:not(.cardPulse):nth-child(4) {
+  animation-delay: 180ms;
+}
+
+:global(.fadeIn.visible) .card:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+/* the pulse hint also lives on `animation` — combine so both still play */
+:global(.fadeIn.visible) .cardPulse {
+  animation:
+    galleryCascade 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards,
+    cardPulse 1.6s ease-out 0.5s 3;
+}
+
+@keyframes galleryCascade {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  /* keep the hint as a static highlight instead of motion */
   .cardPulse {
+    animation: none;
+    border-color: #54FF7E;
+  }
+
+  .mockCursor {
+    animation: none;
+  }
+
+  /* no cascade movement or stagger — the parent's single opacity fade carries
+     the reveal (selectors match the cascade rules above to out-rank them) */
+  :global(.fadeIn.visible) .card,
+  :global(.fadeIn.visible) .cardPulse {
     animation: none;
   }
 }
@@ -240,6 +301,7 @@
   height: 2px;
   border-radius: 50%;
   background: #CFE9FF;
+  animation: novaTwinkle 3.4s ease-in-out infinite alternate;
   box-shadow:
     44px 10px 0 0 rgba(207, 233, 255, 0.9),
     110px 32px 0 0 rgba(139, 92, 246, 0.8),
@@ -259,6 +321,7 @@
   background: radial-gradient(circle at 35% 30%, #00D4FF, #8B5CF6 70%);
   filter: blur(1px);
   box-shadow: 0 0 28px rgba(0, 212, 255, 0.55), 0 0 56px rgba(139, 92, 246, 0.4);
+  animation: novaDrift 4.5s ease-in-out infinite alternate;
 }
 
 .novaRing {
@@ -280,6 +343,16 @@
   letter-spacing: 5px;
   color: #CFE9FF;
   text-shadow: 0 0 12px rgba(0, 212, 255, 0.7);
+}
+
+@keyframes novaDrift {
+  from { transform: translateY(3px); }
+  to { transform: translateY(-3px); }
+}
+
+@keyframes novaTwinkle {
+  from { opacity: 1; }
+  to { opacity: 0.55; }
 }
 
 /* Knight's Saga preview */
@@ -352,7 +425,9 @@
 @media (prefers-reduced-motion: reduce) {
   .sagaEmber,
   .sagaEmberB,
-  .sagaCrest {
+  .sagaCrest,
+  .novaOrb,
+  .novaStars {
     animation: none;
   }
 }

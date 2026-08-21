@@ -98,8 +98,14 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.subscribeButton:hover:not(:disabled) {
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .subscribeButton:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+}
+
+.subscribeButton:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .subscribeButton:disabled,

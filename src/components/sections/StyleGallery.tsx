@@ -100,7 +100,8 @@ export default function StyleGallery({
               <CardPreview id={style.id} />
               <div className={styles.cardBody}>
                 <div className={styles.cardTitleRow}>
-                  <h3 className={styles.cardName}>{style.name}</h3>
+                  {/* span, not h3: headings inside <button> lose their semantics for AT */}
+                  <span className={styles.cardName}>{style.name}</span>
                   {style.status === 'current' && (
                     <span className={styles.badgeCurrent}>CURRENT</span>
                   )}

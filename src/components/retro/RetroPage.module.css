@@ -152,6 +152,11 @@
   border-color: #54FF7E;
 }
 
+/* pixel-era press: instant 1px down-right shift, no easing */
+.cvLink:active {
+  transform: translate(1px, 1px);
+}
+
 .cvMark {
   color: #54FF7E;
 }
@@ -172,6 +177,10 @@
 
 .exit:hover {
   background: #9DFFB6;
+}
+
+.exit:active {
+  transform: translate(1px, 1px);
 }
 
 /* Boot-up staggered reveal */

@@ -78,9 +78,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ctaButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 59, 48, 0.3);
+@media (hover: hover) and (pointer: fine) {
+  .ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 59, 48, 0.3);
+  }
+}
+
+.ctaButton:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .socialIcons {
@@ -189,15 +195,27 @@
   animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.leftColumn > *:nth-child(1) { animation-delay: 0.1s; }
-.leftColumn > *:nth-child(2) { animation-delay: 0.25s; }
-.leftColumn > *:nth-child(3) { animation-delay: 0.4s; }
-.leftColumn > *:nth-child(4) { animation-delay: 0.55s; }
-.leftColumn > *:nth-child(5) { animation-delay: 0.7s; }
+.leftColumn > *:nth-child(1) { animation-delay: 0.08s; }
+.leftColumn > *:nth-child(2) { animation-delay: 0.16s; }
+.leftColumn > *:nth-child(3) { animation-delay: 0.24s; }
+.leftColumn > *:nth-child(4) { animation-delay: 0.32s; }
+.leftColumn > *:nth-child(5) { animation-delay: 0.4s; }
 
 .rightColumn {
   opacity: 0;
-  animation: fadeSlideRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  animation: fadeSlideRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leftColumn > *,
+  .rightColumn {
+    animation-name: fadeOnly;
+  }
+}
+
+@keyframes fadeOnly {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (max-width: 1024px) {

@@ -10,7 +10,6 @@
 /* ─── HUD ─────────────────────────────────────────────────────────── */
 
 .hud {
-  --saga-progress: 0;
   position: fixed;
   inset: 0;
   z-index: 60;
@@ -93,12 +92,16 @@
   letter-spacing: 0.14em;
   padding: 10px 16px;
   cursor: pointer;
-  transition: border-color 0.25s, background 0.25s;
+  transition: border-color 0.25s, background 0.25s, transform 0.15s ease;
 }
 
 .exit:hover {
   border-color: #c9a86a;
   background: rgba(201, 168, 106, 0.16);
+}
+
+.exit:active {
+  transform: scale(0.96);
 }
 
 .readMode {
@@ -115,7 +118,11 @@
   letter-spacing: 0.16em;
   padding: 11px 12px;
   cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, background 0.25s;
+  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.15s ease;
+}
+
+.readMode:active {
+  transform: scale(0.96);
 }
 
 .readMode:hover {
@@ -158,10 +165,14 @@
   overflow: hidden;
 }
 
+/* --saga-progress is set on this element via ref — no HUD-wide recalc,
+   and scaleY stays compositor-only (height would relayout) */
 .progressFill {
   display: block;
   width: 100%;
-  height: calc(var(--saga-progress) * 100%);
+  height: 100%;
+  transform-origin: center top;
+  transform: scaleY(var(--saga-progress, 0));
   background: linear-gradient(180deg, #c9a86a, #ff8c3a);
   box-shadow: 0 0 10px rgba(255, 140, 58, 0.7);
 }
@@ -238,7 +249,7 @@
   flex-direction: column;
   gap: 5px;
   font-family: 'Cinzel', serif;
-  animation: chapterReveal 0.7s ease both;
+  animation: chapterReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .chapterStamp span {
@@ -278,11 +289,14 @@
   font-size: 0.7rem;
   letter-spacing: 0.3em;
   opacity: 1;
-  transition: opacity 0.6s;
+  transition: opacity 0.4s ease, visibility 0s;
 }
 
-.hint[hidden] {
-  display: none;
+/* visibility flips after the fade so the hidden bob stops rendering */
+.hintHidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
 }
 
 .hintArrow {
@@ -339,7 +353,7 @@
   backdrop-filter: blur(10px);
   opacity: 0;
   transform: translateY(26px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .endingInner {
@@ -499,12 +513,16 @@
   letter-spacing: 0.16em;
   border: 1px solid rgba(201, 168, 106, 0.45);
   padding: 10px 16px;
-  transition: background 0.25s, border-color 0.25s;
+  transition: background 0.25s, border-color 0.25s, transform 0.15s ease;
 }
 
 .questLink:hover {
   border-color: #c9a86a;
   background: rgba(201, 168, 106, 0.16);
+}
+
+.questLink:active {
+  transform: scale(0.96);
 }
 
 .returnBtn {
@@ -518,16 +536,20 @@
   letter-spacing: 0.16em;
   padding: 12px 20px;
   cursor: pointer;
-  transition: background 0.25s;
+  transition: background 0.25s, transform 0.15s ease;
 }
 
 .returnBtn:hover {
   background: #e8dcc0;
 }
 
+.returnBtn:active {
+  transform: scale(0.96);
+}
+
 .credits {
   margin-top: 22px;
-  color: rgba(232, 220, 192, 0.4);
+  color: rgba(232, 220, 192, 0.58);
   font-family: 'Inter', sans-serif;
   font-size: 0.68rem;
   line-height: 1.5;
@@ -768,8 +790,10 @@
   }
 
   .progressFill {
-    width: calc(var(--saga-progress) * 100%);
+    width: 100%;
     height: 100%;
+    transform-origin: left center;
+    transform: scaleX(var(--saga-progress, 0));
   }
 
   .chapterStamp {

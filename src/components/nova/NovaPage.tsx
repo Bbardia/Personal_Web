@@ -11,6 +11,8 @@ interface NovaPageProps {
   onExit: () => void
 }
 
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 /* WebGL can fail (old GPU, disabled contexts) — show the journey as plain text instead */
 class CanvasErrorBoundary extends Component<
   { fallback: ReactNode; children: ReactNode },
@@ -62,7 +64,10 @@ export default function NovaPage({ onExit }: NovaPageProps) {
     // drei's scroll container maps offset over (scrollHeight - clientHeight),
     // so derive the chapter position from its own metrics
     const max = el.scrollHeight - el.clientHeight
-    el.scrollTo({ top: (max * index) / (CHAPTERS.length - 1), behavior: 'smooth' })
+    el.scrollTo({
+      top: (max * index) / (CHAPTERS.length - 1),
+      behavior: REDUCED_MOTION ? 'auto' : 'smooth',
+    })
   }, [])
 
   return (
@@ -72,8 +77,9 @@ export default function NovaPage({ onExit }: NovaPageProps) {
           dpr={[1, 1.8]}
           camera={{ position: [0, 0, 7], fov: 62 }}
           gl={{ antialias: true, powerPreference: 'high-performance' }}
+          onCreated={({ gl }) => gl.domElement.setAttribute('aria-hidden', 'true')}
         >
-          <ScrollControls pages={CHAPTERS.length} damping={0.22}>
+          <ScrollControls pages={CHAPTERS.length} damping={REDUCED_MOTION ? 0.01 : 0.22}>
             <Suspense fallback={null}>
               <NovaScene onChapterChange={setChapter} onScrollEl={handleScrollEl} />
             </Suspense>
@@ -97,6 +103,7 @@ export default function NovaPage({ onExit }: NovaPageProps) {
                 className={`${styles.dot} ${i === chapter ? styles.dotActive : ''}`}
                 title={label}
                 aria-label={`Chapter ${i + 1}: ${label}`}
+                aria-current={i === chapter ? 'step' : undefined}
                 onClick={() => flyTo(i)}
               />
             ))}
