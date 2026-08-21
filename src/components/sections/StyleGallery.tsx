@@ -39,6 +39,16 @@ function CardPreview({ id }: { id: PortfolioStyle['id'] }) {
       </div>
     )
   }
+  if (id === 'nova') {
+    return (
+      <div className={`${styles.preview} ${styles.previewNova}`}>
+        <span className={styles.novaStars} />
+        <span className={styles.novaRing} />
+        <span className={styles.novaOrb} />
+        <span className={styles.novaWord}>NOVA</span>
+      </div>
+    )
+  }
   return (
     <div className={`${styles.preview} ${styles.previewSoon}`}>
       <span className={styles.mockQuestion}>?</span>

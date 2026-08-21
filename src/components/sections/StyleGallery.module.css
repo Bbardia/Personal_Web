@@ -38,10 +38,11 @@
 }
 
 .cardsRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -223,6 +224,64 @@
   50% { opacity: 0; }
 }
 
+/* Nova preview — miniature deep space */
+.previewNova {
+  background: radial-gradient(ellipse at 60% 35%, #10173A 0%, #05060F 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.novaStars {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #CFE9FF;
+  box-shadow:
+    44px 10px 0 0 rgba(207, 233, 255, 0.9),
+    110px 32px 0 0 rgba(139, 92, 246, 0.8),
+    180px 6px 0 0 rgba(207, 233, 255, 0.6),
+    230px 48px 0 0 rgba(0, 212, 255, 0.8),
+    268px 18px 0 0 rgba(207, 233, 255, 0.7),
+    20px 84px 0 0 rgba(0, 212, 255, 0.7),
+    150px 96px 0 0 rgba(207, 233, 255, 0.5),
+    250px 92px 0 0 rgba(139, 92, 246, 0.7);
+}
+
+.novaOrb {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #00D4FF, #8B5CF6 70%);
+  filter: blur(1px);
+  box-shadow: 0 0 28px rgba(0, 212, 255, 0.55), 0 0 56px rgba(139, 92, 246, 0.4);
+}
+
+.novaRing {
+  position: absolute;
+  width: 92px;
+  height: 30px;
+  border: 1px solid rgba(0, 212, 255, 0.55);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.novaWord {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-family: 'Unbounded', var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #CFE9FF;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.7);
+}
+
 /* Coming soon preview */
 .previewSoon {
   background: var(--bg-section);
@@ -306,11 +365,5 @@
 
   .titleText {
     font-size: 38px;
-  }
-}
-
-@media (max-width: 900px) {
-  .cardsRow {
-    flex-direction: column;
   }
 }
