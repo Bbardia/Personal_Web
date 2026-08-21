@@ -11,17 +11,21 @@ const navLinks = [
 
 interface NavbarProps {
   pulseStyleLink?: boolean
+  onOpenNewsletter?: () => void
 }
 
-export default function Navbar({ pulseStyleLink = false }: NavbarProps) {
+export default function Navbar({ pulseStyleLink = false, onOpenNewsletter }: NavbarProps) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    setOpen(false)
-    // #newsletter opens a dedicated page (hash route): let the anchor's native
-    // href set the hash so App's hashchange handler swaps in the page.
-    if (href === '#newsletter') return
     e.preventDefault()
+    setOpen(false)
+    // #newsletter opens a dedicated page; App handles the route and records that
+    // it was opened from the menu (so Back returns to the top of the page).
+    if (href === '#newsletter') {
+      onOpenNewsletter?.()
+      return
+    }
     const el = document.querySelector(href)
     el?.scrollIntoView({ behavior: 'smooth' })
   }
