@@ -211,6 +211,20 @@
   color: var(--text-muted);
 }
 
+.statLink {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.statLink:hover {
+  background: var(--bg-section);
+}
+
+.statLink:hover .statLabel {
+  color: var(--text-light);
+}
+
 @media (max-width: 1024px) {
   .skills {
     padding: 48px 24px;

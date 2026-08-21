@@ -72,8 +72,6 @@ export default function About() {
       </div>
 
       {/* Decorative elements */}
-      <div className={styles.decoTri1} />
-      <div className={styles.decoTri2} />
       <div className={styles.decoCircle} />
       <div className={styles.decoLine} />
     </section>
