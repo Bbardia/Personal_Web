@@ -24,6 +24,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Public URL of the Bardi Report Worker endpoint. Set this as a repo
+          # Variable (Settings → Secrets and variables → Actions → Variables):
+          #   BARDI_REPORT_URL = https://<worker>.workers.dev/latest.json
+          # If unset, the site falls back to the bundled sample edition.
+          VITE_BARDI_REPORT_URL: ${{ vars.BARDI_REPORT_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

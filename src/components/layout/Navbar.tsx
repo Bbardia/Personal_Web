@@ -5,6 +5,7 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Newsletter', href: '#newsletter' },
   { label: 'Style', href: '#style' },
 ]
 
@@ -16,8 +17,11 @@ export default function Navbar({ pulseStyleLink = false }: NavbarProps) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
     setOpen(false)
+    // #newsletter opens a dedicated page (hash route): let the anchor's native
+    // href set the hash so App's hashchange handler swaps in the page.
+    if (href === '#newsletter') return
+    e.preventDefault()
     const el = document.querySelector(href)
     el?.scrollIntoView({ behavior: 'smooth' })
   }
