@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import BardiReportReader from './BardiReportReader'
+import SubscribeForm from './SubscribeForm'
 import { useLatestEdition } from '../../hooks/useLatestEdition'
 import styles from './NewsletterPage.module.css'
 
@@ -28,9 +29,12 @@ export default function NewsletterPage({ onExit }: NewsletterPageProps) {
           <ArrowLeft size={18} />
           Back
         </button>
-        <span className={styles.brand}>
-          Bardi<span className={styles.brandAccent}>.</span>Report
-        </span>
+        <div className={styles.rightCluster}>
+          <span className={styles.brand}>
+            Bardi<span className={styles.brandAccent}>.</span>Report
+          </span>
+          <SubscribeForm />
+        </div>
       </header>
 
       <main className={styles.content}>

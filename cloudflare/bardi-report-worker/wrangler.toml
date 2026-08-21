@@ -2,6 +2,26 @@ name = "bardi-report"
 main = "src/index.js"
 compatibility_date = "2025-06-01"
 
+[[ratelimits]]
+name = "SUBSCRIBE_RATE_LIMITER"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 8
+period = 60
+
+[[durable_objects.bindings]]
+name = "SUBSCRIBE_RATE_LIMITER_DO"
+class_name = "SubscribeRateLimiter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SubscribeRateLimiter"]
+
 [[r2_buckets]]
 binding = "REPORTS"
 bucket_name = "bardi-report"
+
+[[kv_namespaces]]
+binding = "SUBSCRIBE_RATE_LIMITS"
+id = "1f37e7ab407e43c382b99bd97256ace1"

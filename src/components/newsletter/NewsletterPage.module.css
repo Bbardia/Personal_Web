@@ -51,6 +51,92 @@
   color: var(--accent-orange);
 }
 
+.rightCluster {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  min-width: 0;
+}
+
+.subscribeForm {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subscribeInput {
+  width: 220px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-white);
+  font-size: 13px;
+}
+
+.subscribeInput::placeholder {
+  color: var(--text-dim);
+}
+
+.subscribeInput:focus {
+  border-color: var(--accent-orange);
+}
+
+.subscribeButton {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--accent-orange);
+  color: var(--text-white);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.subscribeButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.subscribeButton:disabled,
+.subscribeInput:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.subscribeMessage {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 0;
+  max-width: 300px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: rgba(10, 10, 15, 0.95);
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.success {
+  border-color: rgba(184, 255, 0, 0.35);
+  color: var(--accent-lime);
+}
+
+.error {
+  border-color: rgba(255, 59, 48, 0.35);
+  color: var(--accent-red);
+}
+
+.loading {
+  color: var(--text-light);
+}
+
 .content {
   padding: 48px 24px 80px 24px;
 }
@@ -92,12 +178,51 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 760px) {
   .topBar {
-    padding: 0 14px;
+    height: auto;
+    min-height: 64px;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .rightCluster {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .subscribeInput {
+    width: 160px;
+  }
+
+  .subscribeMessage {
+    max-width: 220px;
+    white-space: normal;
+    text-align: right;
   }
 
   .content {
     padding: 28px 14px 60px 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand {
+    display: none;
+  }
+
+  .subscribeForm {
+    gap: 6px;
+  }
+
+  .subscribeInput {
+    width: 136px;
+    padding: 0 10px;
+  }
+
+  .subscribeButton {
+    padding: 0 12px;
   }
 }
